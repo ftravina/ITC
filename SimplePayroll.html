@@ -118,7 +118,7 @@
             updateTable();
         }
 
-        function deleteEmployee() {
+        function Clearpayroll() {
             var deleteLineNumber = parseInt(document.getElementById('deleteLineNumber').value);
 
             if (deleteLineNumber > 0 && deleteLineNumber <= payrollData.length) {
@@ -152,10 +152,14 @@
                 cell5.textContent = payrollData[i].grossPay.toFixed(2);
                 cell6.textContent = payrollData[i].deductionAmount.toFixed(2);
                 cell7.textContent = payrollData[i].netPay.toFixed(2);
-                cell8.innerHTML = '<button onclick="deleteEmployee()">Delete</button>';
+                cell8.innerHTML = '<button onclick="Clearpayroll()">clear</button>';
             }
         }
     </script>
 
+    <br>
+    <a href="index.html">Go back</a>
+
 </body>
 </html>
+

@@ -1,0 +1,161 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payroll Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4c77af;
+            color: white;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 8px;
+            background-color: #4c77af;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Payroll Management System</h2>
+
+    <label for="employeeName">Employee Name:</label>
+    <input type="text" id="employeeName" placeholder="Enter Employee Name">
+    <br>
+
+    <label for="daysWorked">Days Worked:</label>
+    <input type="number" id="daysWorked" placeholder="Enter Days Worked">
+    <br>
+
+    <label for="dailyRate">Daily Rate:</label>
+    <input type="number" id="dailyRate" placeholder="Enter Daily Rate">
+    <br>
+
+    <label for="deductionAmount">Deduction Amount:</label>
+    <input type="number" id="deductionAmount" placeholder="Enter Deduction Amount">
+    <br>
+
+    <button onclick="addEmployee()">Add Employee</button>
+
+    <h3>Payroll List:</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Employee Name</th>
+                <th>Days Worked</th>
+                <th>Daily Rate</th>
+                <th>Gross Pay</th>
+                <th>Deduction Amount</th>
+                <th>Net Pay</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="payrollList"></tbody>
+    </table>
+
+    <label for="deleteLineNumber">Enter Line Number to Delete:</label>
+    <input type="number" id="deleteLineNumber" placeholder="Enter Line Number">
+    <button onclick="deleteEmployee()">Delete Employee</button>
+
+    <script>
+        var payrollData = [];
+
+        function addEmployee() {
+            var employeeName = document.getElementById('employeeName').value;
+            var daysWorked = parseFloat(document.getElementById('daysWorked').value);
+            var dailyRate = parseFloat(document.getElementById('dailyRate').value);
+            var deductionAmount = parseFloat(document.getElementById('deductionAmount').value);
+
+            var grossPay = daysWorked * dailyRate;
+            var netPay = grossPay - deductionAmount;
+
+            var employee = {
+                employeeName: employeeName,
+                daysWorked: daysWorked,
+                dailyRate: dailyRate,
+                grossPay: grossPay,
+                deductionAmount: deductionAmount,
+                netPay: netPay
+            };
+
+            payrollData.push(employee);
+
+            updateTable();
+        }
+
+        function deleteEmployee() {
+            var deleteLineNumber = parseInt(document.getElementById('deleteLineNumber').value);
+
+            if (deleteLineNumber > 0 && deleteLineNumber <= payrollData.length) {
+                payrollData.splice(deleteLineNumber - 1, 1);
+                updateTable();
+            } else {
+                alert('Invalid Line Number. Please enter a valid Line Number to delete.');
+            }
+        }
+
+        function updateTable() {
+            var payrollListTable = document.getElementById('payrollList');
+            payrollListTable.innerHTML = '';
+
+            for (var i = 0; i < payrollData.length; i++) {
+                var row = payrollListTable.insertRow();
+
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                var cell4 = row.insertCell(3);
+                var cell5 = row.insertCell(4);
+                var cell6 = row.insertCell(5);
+                var cell7 = row.insertCell(6);
+                var cell8 = row.insertCell(7);
+
+                cell1.textContent = i + 1;
+                cell2.textContent = payrollData[i].employeeName;
+                cell3.textContent = payrollData[i].daysWorked;
+                cell4.textContent = payrollData[i].dailyRate;
+                cell5.textContent = payrollData[i].grossPay.toFixed(2);
+                cell6.textContent = payrollData[i].deductionAmount.toFixed(2);
+                cell7.textContent = payrollData[i].netPay.toFixed(2);
+                cell8.innerHTML = '<button onclick="deleteEmployee()">Delete</button>';
+            }
+        }
+    </script>
+
+</body>
+</html>

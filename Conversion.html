@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversion Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        input {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Temperature Conversion</h2>
+    <label for="celsius">Celsius:</label>
+    <input type="number" id="celsius" placeholder="Enter Celsius" oninput="convertTemperature()">
+    <br>
+    <label for="fahrenheit">Fahrenheit:</label>
+    <input type="number" id="fahrenheit" placeholder="Enter Fahrenheit" oninput="convertTemperature()">
+    
+    <h2>Length Conversion</h2>
+    <label for="meters">Meters:</label>
+    <input type="number" id="meters" placeholder="Enter Meters" oninput="convertLength()">
+    <br>
+    <label for="feet">Feet:</label>
+    <input type="number" id="feet" placeholder="Enter Feet" oninput="convertLength()">
+
+    <script>
+        function convertTemperature() {
+            var celsiusInput = document.getElementById('celsius');
+            var fahrenheitInput = document.getElementById('fahrenheit');
+
+            var celsius = parseFloat(celsiusInput.value);
+            var fahrenheit = (celsius * 9/5) + 32;
+
+            fahrenheitInput.value = isNaN(fahrenheit) ? '' : fahrenheit.toFixed(2);
+        }
+
+        function convertLength() {
+            var metersInput = document.getElementById('meters');
+            var feetInput = document.getElementById('feet');
+
+            var meters = parseFloat(metersInput.value);
+            var feet = meters * 3.28084;
+
+            feetInput.value = isNaN(feet) ? '' : feet.toFixed(2);
+        }
+    </script>
+
+
+    <a href="index.html">Go back</a>
+
+</body>
+</html>
+

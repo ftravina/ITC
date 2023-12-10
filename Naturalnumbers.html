@@ -1,0 +1,89 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loop Operations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 8px;
+            background-color: #4c77af;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        p {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Loop Operations</h2>
+
+    <label for="inputNumber">Enter an Integer (n):</label>
+    <input type="number" id="inputNumber" placeholder="Enter n">
+    <br>
+
+    <button onclick="calculate()">Calculate</button>
+
+    <h3>Results:</h3>
+    <p id="factorialResult"></p>
+    <p id="sumResult"></p>
+    <p id="averageResult"></p>
+
+    <script>
+        function calculate() {
+            var inputNumber = parseInt(document.getElementById('inputNumber').value);
+
+            // 1. Calculate nth factorial using a While Loop
+            var factorial = 1;
+            var i = 1;
+            while (i <= inputNumber) {
+                factorial *= i;
+                i++;
+            }
+            document.getElementById('factorialResult').textContent = 'Factorial: ' + factorial;
+
+            // 2. Calculate sum of the first n numbers using a Do While Loop
+            var sum = 0;
+            var j = 1;
+            do {
+                sum += j;
+                j++;
+            } while (j <= inputNumber);
+            document.getElementById('sumResult').textContent = 'Sum: ' + sum;
+
+            // 3. Calculate average of the first n numbers using a For Loop
+            var total = 0;
+            for (var k = 1; k <= inputNumber; k++) {
+                total += k;
+            }
+            var average = total / inputNumber;
+            document.getElementById('averageResult').textContent = 'Average: ' + average.toFixed(2);
+        }
+    </script>
+
+    <a href="index.html">Go back</a>
+
+</body>
+</html>
